@@ -37,7 +37,7 @@
 С учетом предложенных корректировок создан Py-файл, который можно посмотреть [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/HW_3/pyspark_script.py).
 
 ## 6.Выполнить очистку датасета с использованием созданного скрипта и сохранить его в созданном выше bucket’е в формате parquet
-Для работы скрипта создам задание в кластере:
+Для работы скрипта создам задание в кластере (инструкция по подготовке задания https://cloud.yandex.ru/ru/docs/data-proc/tutorials/pyspark-job-basics):
 
 ![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/de29aa64-3051-476d-932b-887b47a50f5e)
 
