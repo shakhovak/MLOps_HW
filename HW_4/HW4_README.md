@@ -24,14 +24,14 @@
 4. для подключения сервисного аккаунта для создания кластера и job будет использоваться аторизованный ключ в формате json, который я сохранила вместе с DAG
 ![Alt text](image-2.png)
 
-## 2. Создать DAG для запуска скрипта по очистке датасет
-Для работы со скриптом, который сохранен в бакете Object Storage, подготовлен DAG data_proc.py, который можно посмотреть здесь.
+## 2. Создать DAG для запуска скрипта по очистке датасета
+Для работы со скриптом, который сохранен в бакете Object Storage, подготовлен DAG data_proc.py, который можно посмотреть [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/HW_4/data_proc.py).
 
 ![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/cf83f1d7-9532-4d6c-92b8-4e938036ff16)
 
 В нем использованы 3 оператора от провайдера yandex:
 1. ```DataprocCreateClusterOperator``` , который позволяет создавать кластер HDFS в Data Proc. Детально можно почитать [здесь](https://airflow.apache.org/docs/apache-airflow-providers-yandex/2.2.0/_api/airflow/providers/yandex/operators/yandexcloud_dataproc/index.html)
-2. ```DataprocCreatePysparkJobOperator```, который создает и запускает job на имеющемся в каталоге кластере. Реализовано на основе spark-submit. В качестве скрипта для job используется скрипт по очистке данных, который можно посмотреть вот здесь.
+2. ```DataprocCreatePysparkJobOperator```, который создает и запускает job на имеющемся в каталоге кластере. Реализовано на основе spark-submit. В качестве скрипта для job используется скрипт по очистке данных, который можно посмотреть вот [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/HW_4/pyspark_script.py).
 3. ```DataprocDeleteClusterOperator```, который удаляет созданный кластер после завершения job.
 
 ## 3. Запустить DAG и получить 3 автоматические обработки.
