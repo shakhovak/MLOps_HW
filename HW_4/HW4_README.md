@@ -29,8 +29,9 @@
 
 ![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/cf83f1d7-9532-4d6c-92b8-4e938036ff16)
 
-В нем использованы 3 оператора от провайдера yandex:
-1. ```DataprocCreateClusterOperator``` , который позволяет создавать кластер HDFS в Data Proc. Детально можно почитать [здесь](https://airflow.apache.org/docs/apache-airflow-providers-yandex/2.2.0/_api/airflow/providers/yandex/operators/yandexcloud_dataproc/index.html)
+В нем использованы 3 оператора от провайдера yandex (детально про провайдера можно почитать [здесь](https://airflow.apache.org/docs/apache-airflow-providers-yandex/2.2.0/_api/airflow/providers/yandex/operators/yandexcloud_dataproc/index.html)):
+
+1. ```DataprocCreateClusterOperator``` , который позволяет создавать кластер HDFS в Data Proc. 
 2. ```DataprocCreatePysparkJobOperator```, который создает и запускает job на имеющемся в каталоге кластере. Реализовано на основе spark-submit. В качестве скрипта для job используется скрипт по очистке данных, который можно посмотреть вот [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/HW_4/pyspark_script.py).
 3. ```DataprocDeleteClusterOperator```, который удаляет созданный кластер после завершения job.
 
