@@ -19,9 +19,28 @@
 2. Установить на ней необходимые библиотеки
 
 ```python 
-
 conda install -c conda-forge mlflow
 conda install -c anaconda boto3
 pip install psycopg2-binary
 pip install pandas
 ```
+3. Добавить доступы к S3
+4. Созадать базу данных с помощью сервиса Managed Service for PostgreSQL
+
+![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/31ef11dd-9f08-48c6-9a19-faa0d0a22932)
+
+6. Запустить MLFlow Tracking Server
+
+# Обучение модели
+Для обучения модели я создала кластер для вычислений как в предыдщем задании.
+   ![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/71d00252-a0b2-4c5f-8005-0188f01f6819)
+   
+ > [!IMPORTANT]
+> **Мне не удалось запустить задание на кластере, так как не устанавливался MLFlow в рамках автоматического запуска задания. В результате я скопировала скрипт на кластер через терминала и запускала его вручную через spark-submit!**
+
+# Результаты обучения
+Результаты обучения отражаются в базе данных и в IU MLFlow
+
+
+
+   
