@@ -57,18 +57,20 @@ def main():
     logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
     logger = logging.getLogger()
 
-    #os.environ["MLFLOW_S3_ENDPOINT_URL"] = "https://storage.yandexcloud.net"
-    #os.environ["AWS_DEFAULT_REGION"] = "ru-central1"
-    mlflow.set_tracking_uri(f"http://10.128.0.20:8000")
+    os.environ["AWS_ACCESS_KEY_ID"] = "YCAJEmoO3Dm1AkG4BosglwClr"
+    os.environ["AWS_SECRET_ACCESS_KEY"] = "YCP9zQDgOk_lMGKFlGdtjz8laJwq_WSHp11j9wbS"
+    os.environ["MLFLOW_S3_ENDPOINT_URL"] = "https://storage.yandexcloud.net"
+    os.environ["AWS_DEFAULT_REGION"] = "ru-central1"
+    mlflow.set_tracking_uri(f"http://10.128.0.30:8000")
     logger.info("tracking URI: %s", {mlflow.get_tracking_uri()})
 
-    experiment_name = "spark_train_fin"
+    experiment_name = "model_train"
     try:
         experiment = mlflow.get_experiment_by_name(experiment_name)
         experiment_id = experiment.experiment_id
     except AttributeError:
         experiment_id = mlflow.create_experiment(
-            experiment_name, artifact_location="s3a://mlopsshakhova/mlflow/artifacts/"
+            experiment_name, artifact_location="s3://shakhmlflow/artifacts/"
         )
     mlflow.set_experiment(experiment_name)
 
@@ -153,8 +155,10 @@ def main():
         )
 
         logger.info("Exporting/logging model ...")
-        #artifact_path = mlflow.active_run().info.artifact_uri
+        # artifact_path = mlflow.active_run().info.artifact_uri
+        # mlflow.spark.save_model(bestModel, "lr_model")
         mlflow.spark.log_model(bestModel, "lr_model")
+
         logger.info("Done")
 
         spark.stop()
