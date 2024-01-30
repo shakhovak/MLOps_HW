@@ -32,13 +32,14 @@ pip install pandas
 3. Добавить доступы к S3
 4. Создать базу данных с помощью сервиса Managed Service for PostgreSQL
 
-![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/31ef11dd-9f08-48c6-9a19-faa0d0a22932)
+![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/0670c858-c15b-4596-a2f0-322b16215655)
 
 6. Запустить MLFlow Tracking Server 
 
 # Обучение модели
 Для обучения модели я создала кластер для вычислений как в предыдущем задании.
-   ![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/71d00252-a0b2-4c5f-8005-0188f01f6819)
+
+![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/57cd210a-1003-4d23-b304-ba11e8a116b9)
 
 При инициализации кластера нужно указать, какие дополнительные пакеты нужно установить для работы со скриптами. Пакеты указываются в свойствах/properties.
 
@@ -60,17 +61,18 @@ pip:urllib3 : 1.26.16
  
 # Результаты обучения и выводы:
 Результаты обучения отражаются в базе данных и в IU MLFlow и приведены на прин-скринах ниже. 
-Обучение модели уже на данных за 2 дня дало прирост в метрике. Ожидается, что дальнейшее увеличение обучающей выборке даст дальнейшую точность предсказания.
 
-UI ML Flow -
+Успешно отработал Airflow:
+![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/f337ce63-823d-4d40-b64d-cda0858e55e2)
 
-![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/0051208f-e2f6-4782-90aa-cfbc96e98742)
+UI ML Flow:
+![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/61414787-c874-4199-b37f-c419b9680f75)
 
 S3 c артефактом модели:
-![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/70d10ec8-48aa-4022-ae0f-b3c4e963d609)
+![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/8e14723d-048b-4b73-9c0b-ce26119bd3d5)
 
 Также сохранилась информация и в базе данных:
-![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/1df1ad9c-22bd-4d8e-bdc7-200414733ec6)
+![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/6d3f3e66-2bc2-46b7-8583-c4a6194f5c46)
 
 После обучения я удалила все ВМ и базы данных.
 
