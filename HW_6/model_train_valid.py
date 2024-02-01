@@ -78,8 +78,8 @@ def main():
     logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
     logger = logging.getLogger()
 
-    os.environ["AWS_ACCESS_KEY_ID"] = ""
-    os.environ["AWS_SECRET_ACCESS_KEY"] = ""
+    os.environ["AWS_ACCESS_KEY_ID"] = "YCAJEmoO3Dm1AkG4BosglwClr"
+    os.environ["AWS_SECRET_ACCESS_KEY"] = "YCP9zQDgOk_lMGKFlGdtjz8laJwq_WSHp11j9wbS"
     os.environ["MLFLOW_S3_ENDPOINT_URL"] = "https://storage.yandexcloud.net"
     os.environ["AWS_DEFAULT_REGION"] = "ru-central1"
     mlflow.set_tracking_uri(
@@ -196,7 +196,6 @@ def main():
         # compare scores distrubution of initial and tuned models
         pvalue, result = compare_distributions(scores_init, scores_tuned)
         mlflow.log_metric("pvalue_ttest", round(pvalue, 4))
-        mlflow.log_metric("result", result)
 
         if result == "dist_IDENTICAL":
             mlflow.spark.log_model(model, "main_model")
