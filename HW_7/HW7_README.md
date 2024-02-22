@@ -8,8 +8,7 @@
 # Общий подход
 Для решения этой задачи я выполню следующие шаги:
 
-1. С помощью сревиса Managed Service for Kafka создам кластер Kafka для получения и хранения данных из файла generate.py, который будет имитировать генерацию данных пользователями. Файл можно посмотреть вот здесь.
-Для экономии выберу только 1 хост, как показано на принт-скрине ниже:
+1. С помощью сервиса Managed Service for Kafka создам кластер Kafka для получения и хранения данных из файла generate.py, который будет имитировать генерацию данных пользователями. Файл можно посмотреть вот [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/HW_7/generate.py). Для экономии выберу только 1 хост, как показано на принт-скрине ниже:
 
 ![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/dd36415a-352c-49bf-8188-ae60d74d436c)
 
@@ -46,8 +45,8 @@ kafkacat -C \
 
 ![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/9107363f-4478-4f4a-a5e9-11fe4cd9c76f)
 
-10. Подготовлю spark-script (его можно посмотреть вот здесь), который будет считаывать данные из топика test-topic с помощью Spark Structured Streaming, фильтровать данные по пользователям и отбирать только пользователей из России. Отфильтрованные данные будует записывать в топик reworked.
-11. После запуска скрипта (я не делала spark-submit, а вспользовалась командой ```python3 spark_script.py```. Spark-submit вызвался автоматчески при запуске скрпита. Аргументы для spark-submit я собрала в переменной среды ```os.environ['PYSPARK_SUBMIT_ARGS']```) я проверяю, как данные записались в новый топик. Для этого использую kafkacat:
+10. Подготовлю spark-script (его можно посмотреть вот [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/HW_7/spark_script.py), который будет считывать данные из топика test-topic с помощью Spark Structured Streaming, фильтровать данные по пользователям и отбирать только пользователей из России. Отфильтрованные данные будут записаны в топик reworked.
+11. После запуска скрипта (я не делала spark-submit, а воспользовалась командой ```python3 spark_script.py```. Spark-submit вызвался автоматически при запуске скрипта. Аргументы для spark-submit я собрала в переменной среды ```os.environ['PYSPARK_SUBMIT_ARGS']```) я проверяю, как данные записались в новый топик. Для этого использую kafkacat:
 
 ```python
 kafkacat -C \
@@ -59,7 +58,7 @@ kafkacat -C \
          -X sasl.password="Privet1981" \
          -X ssl.ca.location=/usr/local/share/ca-certificates/Yandex/YandexInternalRootCA.crt -Z -K:
 ```
-Как видно из скрина, данные уже в обработанном виде записались в новый топик. User_id стал новым ключем:
+Как видно из скрина, данные уже в обработанном виде записались в новый топик. User_id стал новым ключом:
 
 ![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/30b25630-8ad0-4e08-8f49-b3a0f1b623cb)
 
