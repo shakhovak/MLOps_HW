@@ -43,7 +43,7 @@
 
 Скрипт для обработки в виде задания (можно посмотреть [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/Fin_project/Scripts/data_process_pyspark.py)) будет запускаться на временном кластере Spark. Для создания временного кластера, запуска на нем задания и последующего удаления кластера Airflow запускает соответствующий DAG, который можно посмотреть [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/Fin_project/DAGs/DAG_data_process.py). 
 
-После обработки данные сохраняются в object storage в папку processed в формате csv.
+После обработки данные сохраняются в object storage в папку processed в формате parquet.
 
 <hr>
 <details>
@@ -67,7 +67,7 @@
 
 В процессе обучения параметры обучения записываются в ML Flow, который настроен на отдельной ВМ. Для обучения я использовала билиотеку ```hugging face```, у нее уже есть встроенный callback с ML Flow, поэтому в скрипте по обучению нужно только указать несколько переменных среды. Детальная инструкция по callback вот [здесь](https://huggingface.co/docs/transformers/v4.38.2/en/main_classes/callback#transformers.integrations.MLflowCallback), ролик с примером использования на [youtube](https://www.youtube.com/watch?v=vmfaDZjeB4M&t=1s)
 
-Обученная модель сохраняется в ML Flow, также я добавила еще сохранение на hugging face (репозиторий с готовой моделью)
+Обученная модель сохраняется в ML Flow, также я добавила еще сохранение на hugging face (репозиторий с готовой моделью https://huggingface.co/Shakhovak/ruT5-base_horoscopes-generator)
 
 <hr>
 <details>
