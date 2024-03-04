@@ -149,14 +149,16 @@ pip install -r requirements.txt
 <details>
   <summary>Технические детали - click to open:</summary>
 После запуска ВМ необходимо создать и активировать виртуальное окружение и установить необходимые библиотеки (torch, transformers, aiogram):
-  ```
-    sudo apt update
-    python3 –version
-    sudo apt-get install python3-pip
-    sudo apt install python3.10-venv
-    python3 -m venv <venv_name>
-    source <venv_name>/bin/activate
-  ```
+  
+```
+  sudo apt update
+  python3 –version
+  sudo apt-get install python3-pip
+  sudo apt install python3.10-venv
+  python3 -m venv <venv_name>
+  source <venv_name>/bin/activate
+```
+
 Файл с чат-ботом и config.json (с токеном) сохраняем также на ВМ. 
 
 Дальше нужно создать файл с daemon-process, для запуска и поддержания работы чат-бота:
