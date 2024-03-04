@@ -10,6 +10,16 @@
 
 ![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/afba4ee5-7302-4e80-8dad-d20c5667b8e7)
 
+**Итого:**
+- :triumph: Создано 4 ВМ облаке: 
+
+![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/bd506cd2-33da-47e9-8266-23317c7fc205)
+
+
+- :triumph: Airflow - 4 DAGs:
+
+![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/77e1db6e-59fc-4c5b-b51f-47651d9bbd56)
+
 
 ### Сбор данных
 Сбор данных осуществляется с нескольких сайтов один раз в день. Так как структура данных разная, то при сборе данные приводятся к одной схеме. Сбор данных оркеструется Airflow, который размещен на ВМ в облаке. DAG для сбора данных можно посмотреть вот [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/Fin_project/DAGs/DAG_data_collect.py) .
@@ -63,11 +73,14 @@
 
 ### Обучение модели
 Для обучения модели я буду использовать библиотеку ```datasphere``` с возможностью запуска задания на разных конфигурациях GPU с локальной или облачной ВМ с использованием ресурсов только на время вычисления (детальная [инструкция](https://cloud.yandex.ru/ru/docs/datasphere/operations/projects/work-with-jobs) от Yandex). Так как это новая разработка, то у Яндекса нет специального оператора для запуска заданий из Airflow, поэтому я воспользусь SSHOperator.
-Скрипт для обучения модели можно посмотреть [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/Fin_project/Scripts/datasphere_scripts/main_train.py). Скрипт используемый Airflow для запуска задания [здесь](). Для хранения среды и скриптов для задания создается отдельная ВМ на Ubuntu.
+Скрипт для обучения модели можно посмотреть [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/Fin_project/Scripts/datasphere_scripts/main_train.py). Скрипт используемый Airflow для запуска задания [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/Fin_project/DAGs/DAG_model_train.py). Для хранения среды и скриптов для задания создается отдельная ВМ на Ubuntu.
 
 В процессе обучения параметры обучения записываются в ML Flow, который настроен на отдельной ВМ. Для обучения я использовала билиотеку ```hugging face```, у нее уже есть встроенный callback с ML Flow, поэтому в скрипте по обучению нужно только указать несколько переменных среды. Детальная инструкция по callback вот [здесь](https://huggingface.co/docs/transformers/v4.38.2/en/main_classes/callback#transformers.integrations.MLflowCallback), ролик с примером использования на [youtube](https://www.youtube.com/watch?v=vmfaDZjeB4M&t=1s)
 
 Обученная модель сохраняется в ML Flow, также я добавила еще сохранение на hugging face (репозиторий с готовой моделью https://huggingface.co/Shakhovak/ruT5-base_horoscopes-generator)
+
+![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/099b532a-ec43-449d-84a6-ad8610c7e8a9)
+
 
 <hr>
 <details>
@@ -115,7 +128,12 @@ pip install -r requirements.txt
 
 Сгенерированные данные, их метрики, а также усредненные данные по тестовой генерации будут записываться в ML Flow.
 
-Оценка будет запускаться DAG в Airflow после обучения модели. Посмотреть DAG можно вот [здесь](). Скрипт по обучению также использует библиотеку ```datashpere``` и размещен на той же ВМ, что и скрипт по обучению.
+Оценка будет запускаться DAG в Airflow после обучения модели. Посмотреть DAG можно вот [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/Fin_project/DAGs/DAG_model_evaluate.py). Скрипт по обучению также использует библиотеку ```datashpere``` и размещен на той же ВМ, что и скрипт по обучению.
+Также на ВМ необходимо разместить (все файлы можно посмотреть в этой [папке](https://github.com/shakhovak/MLOps_HW/tree/master/Fin_project/Scripts/datasphere_scripts):
+1. main_evaluate.py - скрипт для обучения модели и загрузки ее в репозиторий
+2. config_evaluate.yaml - инструкция для запуска задания
+3. requirements.txt - список библиотек для работы скрипта. Этот список будет использоваться datasphere для настройки окружения.
+4. 
 Для фиксации результатов оценки используется ML Flow, развернутый на отдельной ВМ с хранилищем артефактов в бакете s3 и базой Postgres для хранения метрик.
 
 ### Использование модели
