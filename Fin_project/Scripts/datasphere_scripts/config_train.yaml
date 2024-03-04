@@ -1,0 +1,9 @@
+name: train-horo-generator
+desc: Training
+cmd: python3 main_train.py "s3://mlopsshakhova/project/processed/fin_horo.parquet" "ai-forever/ruT5-base"
+env:
+  python:
+   type: manual
+   version: 3.10.12
+   requirements-file: requirements.txt
+cloud-instance-type: g2.1

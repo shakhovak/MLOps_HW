@@ -1,0 +1,9 @@
+name: train-horo-generator
+desc: Evaluation
+cmd: python3 main_evaluate.py "T5" "Shakhovak/ruT5-base_horoscopes-generator"
+env:
+  python:
+   type: manual
+   version: 3.10.12
+   requirements-file: requirements.txt
+cloud-instance-type: g2.1
