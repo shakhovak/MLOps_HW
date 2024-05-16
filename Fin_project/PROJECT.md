@@ -77,7 +77,7 @@
 
 В процессе обучения параметры обучения записываются в ML Flow, который настроен на отдельной ВМ. Для обучения я использовала библиотеку ```hugging face```, у нее уже есть встроенный callback с ML Flow, поэтому в скрипте по обучению нужно только указать несколько переменных среды. Детальная инструкция по callback вот [здесь](https://huggingface.co/docs/transformers/v4.38.2/en/main_classes/callback#transformers.integrations.MLflowCallback), ролик с примером использования на [youtube](https://www.youtube.com/watch?v=vmfaDZjeB4M&t=1s)
 
-Обученная модель сохраняется в ML Flow, также я добавила еще сохранение на hugging face (репозиторий с готовой моделью https://huggingface.co/Shakhovak/ruT5-base_horoscopes-generator)
+Обученная модель сохраняется в ML Flow, также я добавила еще сохранение на hugging face (UPD:удалила модель уже! репозиторий с готовой моделью https://huggingface.co/Shakhovak/ruT5-base_horoscopes-generator)
 
 ![image](https://github.com/shakhovak/MLOps_HW/assets/89096305/099b532a-ec43-449d-84a6-ad8610c7e8a9)
 
@@ -143,7 +143,7 @@ pip install -r requirements.txt
 Обученная модель из репозитория будет использоваться в телеграм чат-боте, который размещается на отдельной ВМ с Ubuntu. В основе чат-бота библиотека ```aiogram```. Скрипт с ботом можно посмотреть вот [здесь](https://github.com/shakhovak/MLOps_HW/blob/master/Fin_project/Scripts/chat_bot.py). На ВМ чат-бот запускается с помощью Linux Service.
 
 > [!IMPORTANT]
-> **Пообщаться с ботом и посмотреть свой гороскоп можно по ссылке https://t.me/Terra_NLP_bot .**
+> **Пообщаться с ботом и посмотреть свой гороскоп можно по ссылке https://t.me/Terra_NLP_bot .** (UPD: удалила ВМ, так как кушались денежки:()
 
 <hr>
 <details>
